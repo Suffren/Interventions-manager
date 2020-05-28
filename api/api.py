@@ -10,4 +10,8 @@ cur.execute("INSERT INTO reports VALUES('Ampoule defecteuse')")
 # Save
 conn.commit()
 
+cur.execute('SELECT * FROM reports')
+print cur.fetchall()
+
+
 conn.close()
