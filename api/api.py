@@ -67,5 +67,22 @@ def api_all():
 
     return jsonify(all_reports)
 
+@app.route('/api/v1/report', methods=['GET'])
+def report_by_id():
+    query_parameters = request.args
+    id = query_parameters.get('id')
+
+    if id:
+        id = str(id)
+    else:
+        return "<h1>404</h1>"
+
+    conn = sqlite3.connect('reports.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+
+    query = 'SELECT * FROM reports WHERE id={}'.format(id)
+    report = cur.execute(query).fetchone()
+    return jsonify(report)
 
 app.run()
