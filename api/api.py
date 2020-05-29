@@ -52,6 +52,11 @@ def dict_factory(cursor, row):
 if __name__ == '__main__':
     main()
 
+# customize the error page
+@app.errorhandler(404)
+def page_error(status_code):
+    return "<h1>" + status_code + "</h1><p>An error has occurred for this resource.</p>", status_code
+
 @app.route('/', methods=['GET'])
 def home():
     return  '''<h1>Distant Reading Archive</h1>
@@ -75,7 +80,7 @@ def report_by_id():
     if id:
         id = str(id)
     else:
-        return "<h1>404</h1>"
+        return page_error("404")
 
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
