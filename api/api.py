@@ -2,7 +2,7 @@
 
 import sqlite3
 import flask
-from flask import request, jsonify
+from flask import request, abort, jsonify
 # Make cross-origin AJAX possible
 from flask_cors import CORS, cross_origin
 
@@ -56,10 +56,9 @@ def dict_factory(cursor, row):
 if __name__ == '__main__':
     main()
 
-# customize the error page
 @app.errorhandler(404)
-def page_error(status_code):
-    return "<h1>" + status_code + "</h1><p>An error has occurred for this resource.</p>", status_code
+def error_handler(err):
+    return jsonify(error = str(err)), 404
 
 @app.route('/', methods=['GET'])
 def home():
@@ -86,7 +85,7 @@ def report_by_id():
     if id:
         id = str(id)
     else:
-        return page_error("404")
+        return abort(404, description = "Resource not found.")
 
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
