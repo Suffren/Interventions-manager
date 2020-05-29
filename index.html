@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 
-<html ng-app="reportsApp">
+<html ng-app="app">
     <head>
         <meta charset="utf-8" />
         <meta name="description" content="Gérez vos interventions." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+        <script src="app.js"></script>
     </head>
 
     <body>
-        <div>
+        <div ng-controller="mainCtrl as main">
             <h1>Interventions-manager</h1>
             <hr>
             <p>Bienvenue</p>
+            <div ng-repeat="report in main.reports">
+                <p>{{ report.label }}</p>
+            </div>
         </div>
     </body>
 
