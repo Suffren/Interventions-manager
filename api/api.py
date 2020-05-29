@@ -39,6 +39,15 @@ def main():
 
     conn.close()
 
+# Return a new object with columns names as keys
+# see https://docs.python.org/2.7/library/sqlite3.html#connection-objects, 'row_factory' section
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
 # Ensure this module has not been imported
 if __name__ == '__main__':
     main()
@@ -52,6 +61,7 @@ def home():
 @app.route('/api/v1/reports', methods=['GET'])
 def api_all():
     conn = sqlite3.connect('reports.db')
+    conn.row_factory = dict_factory
     cur = conn.cursor()
     all_reports = cur.execute('SELECT * FROM reports;').fetchall()
 
