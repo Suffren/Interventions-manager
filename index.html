@@ -15,9 +15,27 @@
             <h1>Interventions-manager</h1>
             <hr>
             <p>Bienvenue</p>
-            <div ng-repeat="report in main.reports">
-                <p>{{ report.label }}</p>
-            </div>
+
+            <table>
+                <tr>
+                    <td>Libellés</td>
+                    <td>Intervenants</td>
+                    <td>Dates</td>
+                    <td>Descriptions</td>
+                    <td>Lieux</td>
+                    <td>Statuts</td>
+                    <td><!-- button --></td>
+                </tr>
+                <tr ng-repeat="report in main.reports">
+                    <td>{{ report.label }}</td>
+                    <td>M. {{ report.pro_lastname }}</td>
+                    <td>{{ report.date | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ report.description }}</td>
+                    <td>{{ report.place }}</td>
+                    <td><!-- status --></td>
+                    <td><!-- button --></td>
+                </tr>
+              </table>
         </div>
     </body>
 
