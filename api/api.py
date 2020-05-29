@@ -3,9 +3,13 @@
 import sqlite3
 import flask
 from flask import request, jsonify
+# Make cross-origin AJAX possible
+from flask_cors import CORS, cross_origin
 
 app = flask.Flask(__name__)
+cors = CORS(app)
 app.config["DEBUG"] = True
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 reports = [
     (0, "Nid-de-poule", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut risus ac neque porttitor egestas. Nulla placerat id purus vel elementum.", "Doe", "Nantes", "2019-12-25"),
@@ -64,6 +68,7 @@ def home():
 
 # route() decorator binds a function to a URL
 @app.route('/api/v1/reports', methods=['GET'])
+@cross_origin()
 def api_all():
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
@@ -73,6 +78,7 @@ def api_all():
     return jsonify(all_reports)
 
 @app.route('/api/v1/report', methods=['GET'])
+@cross_origin()
 def report_by_id():
     query_parameters = request.args
     id = query_parameters.get('id')
