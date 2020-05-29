@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import sqlite3
+import flask
+from flask import request, jsonify
 
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
 
 reports = [
     (0, "Nid-de-poule", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut risus ac neque porttitor egestas. Nulla placerat id purus vel elementum.", "Doe", "Nantes", "2019-12-25"),
@@ -38,3 +42,11 @@ def main():
 # Ensure this module has not been imported
 if __name__ == '__main__':
     main()
+
+@app.route('/', methods=['GET'])
+def home():
+    return  '''<h1>Distant Reading Archive</h1>
+            <p>A prototype API for distant reading of science fiction novels.</p>'''
+
+
+app.run()
