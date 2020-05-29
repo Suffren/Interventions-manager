@@ -48,5 +48,14 @@ def home():
     return  '''<h1>Distant Reading Archive</h1>
             <p>A prototype API for distant reading of science fiction novels.</p>'''
 
+# route() decorator binds a function to a URL
+@app.route('/api/v1/reports', methods=['GET'])
+def api_all():
+    conn = sqlite3.connect('reports.db')
+    cur = conn.cursor()
+    all_reports = cur.execute('SELECT * FROM reports;').fetchall()
+
+    return jsonify(all_reports)
+
 
 app.run()
