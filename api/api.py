@@ -97,7 +97,27 @@ def report_by_id():
     report = cur.execute(query).fetchone()
     return jsonify(report)
 
-@app.route('/api/v1/new_report', methods=['POST'])
+@app.route('/api/v1/delete_report', methods=['DELETE'])
+@cross_origin()
+def delete_report():
+    query_parameters = request.args
+    id = query_parameters.get('id')
+
+    if id:
+        id = str(id)
+    else:
+        return abort(404, description = "Resource not found.")
+
+    conn = sqlite3.connect('reports.db')
+    cur = conn.cursor()
+    query = 'DELETE FROM reports WHERE id={}'.format(id)
+    cur.execute(query)
+    conn.commit()
+    conn.close()
+
+    return jsonify(data = "success")
+
+@app.route('/api/v1/add_report', methods=['POST'])
 @cross_origin()
 def add_report():
     label = request.form.get('label')
