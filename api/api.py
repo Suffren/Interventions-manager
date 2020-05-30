@@ -44,8 +44,8 @@ def main():
 
     conn.close()
 
-# Return a new object with columns names as keys
-# see https://docs.python.org/2.7/library/sqlite3.html#connection-objects, 'row_factory' section
+# Return an object with columns names as keys
+# See https://docs.python.org/2.7/library/sqlite3.html#connection-objects, 'row_factory' section
 def dict_factory(cursor, row):
     d = {}
     for idx, col in enumerate(cursor.description):
@@ -68,13 +68,15 @@ def home():
 
 # route() decorator binds a function to a URL
 @app.route('/api/v1/reports', methods=['GET'])
-# allow all origins, all methods
+# Allow all origins, all methods
 @cross_origin()
 def api_all():
     conn = sqlite3.connect('reports.db')
+    # Format a SQL row to a readable dictionary
     conn.row_factory = dict_factory
+    # Cursor allows to perform database operations
     cur = conn.cursor()
-    all_reports = cur.execute('SELECT * FROM reports;').fetchall()
+    all_reports = cur.execute('SELECT * FROM reports').fetchall()
 
     return jsonify(all_reports)
 
@@ -130,7 +132,7 @@ def add_report():
     conn.row_factory = dict_factory
     cur = conn.cursor()
     cur.execute('INSERT INTO reports VALUES(?, ?, ?, ?, ?, ?)', (None, label, description, pro_lastname, place, date))
-    # return the new reports.db
+    # Return the new reports.db
     all_reports = cur.execute('SELECT * FROM reports;').fetchall()
 
     conn.commit()
