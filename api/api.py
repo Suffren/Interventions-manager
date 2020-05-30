@@ -138,5 +138,33 @@ def add_report():
 
     return jsonify(all_reports)
 
+@app.route('/api/v1/update_report', methods=['POST'])
+@cross_origin()
+def update_report():
+    label = request.form.get('label')
+    description = request.form.get('description')
+    date = request.form.get('date')
+    pro_lastname = request.form.get('pro_lastname')
+    place = request.form.get('place')
+
+    query_parameters = request.args
+    id = query_parameters.get('id')
+
+    if id:
+        id = str(id)
+    else:
+        return abort(404, description = "Resource not found.")
+
+    conn = sqlite3.connect('reports.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=? WHERE id=?', (label, description, date, pro_lastname, place, id))
+    # Get & return the updated report
+    query = 'SELECT * FROM reports WHERE id={}'.format(id)
+    report = cur.execute(query).fetchone()
+
+    conn.commit()
+    conn.close()
+    return jsonify(report)
 
 app.run()
