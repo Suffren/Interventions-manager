@@ -9,6 +9,7 @@ from flask_cors import CORS, cross_origin
 app = flask.Flask(__name__)
 cors = CORS(app)
 app.config["DEBUG"] = True
+# Allow POST requests with a JSON content type to browsers
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 reports = [
@@ -67,6 +68,7 @@ def home():
 
 # route() decorator binds a function to a URL
 @app.route('/api/v1/reports', methods=['GET'])
+# allow all origins, all methods
 @cross_origin()
 def api_all():
     conn = sqlite3.connect('reports.db')
