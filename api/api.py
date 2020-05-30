@@ -97,4 +97,26 @@ def report_by_id():
     report = cur.execute(query).fetchone()
     return jsonify(report)
 
+@app.route('/api/v1/new_report', methods=['POST'])
+@cross_origin()
+def add_report():
+    label = request.form.get('label')
+    description = request.form.get('description')
+    date = request.form.get('date')
+    pro_lastname = request.form.get('pro_lastname')
+    place = request.form.get('place')
+
+    conn = sqlite3.connect('reports.db')
+    conn.row_factory = dict_factory
+    cur = conn.cursor()
+    cur.execute('INSERT INTO reports VALUES(?, ?, ?, ?, ?, ?)', (None, label, description, pro_lastname, place, date))
+    # return the new reports.db
+    all_reports = cur.execute('SELECT * FROM reports;').fetchall()
+
+    conn.commit()
+    conn.close()
+
+    return jsonify(all_reports)
+
+
 app.run()
