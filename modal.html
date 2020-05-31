@@ -1,0 +1,35 @@
+<form id="interv_modal">
+    <div class="modal_content">
+        <h2 style="text-align: center;">Intervention</h2>
+
+        <div class="form-group">
+            <label for="label">Libellé:</label>
+            <input type="text" class="form-control" id="label" placeholder="Ex: Ampoule défecteuse" ng-model="$ctrl.form.label">
+        </div>
+
+        <div class="form-group">
+            <label for="place">Lieu:</label>
+            <input type="text" class="form-control" id="place" placeholder="Ex: Nantes" ng-model="$ctrl.form.place">
+        </div>
+
+        <div class="form-group">
+            <label for="pro_lastname">Nom de l'intervenant:</label>
+            <input type="text" class="form-control" id="pro_lastname" placeholder="Ex: Dupond" ng-model="$ctrl.form.pro_lastname">
+        </div>
+
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="text" class="form-control" id="date" placeholder="dd" ng-model="$ctrl.form.place">
+        </div>
+
+        <div class="form-group">
+            <label for="desc">Description:</label>
+            <textarea style="max-width: 100%; min-height: 34px;" class="form-control" rows="3" placeholder="Saisissez ici un descriptif de l'incident" id="desc" ng-model="$ctrl.form.description"></textarea>
+        </div>
+
+        <div style="text-align: right;">
+            <button type="button" class="btn btn-default" ng-click="cancel()">Annuler</button>
+            <button type="button" class="btn btn-success" ng-click="confirm()">Valider</button>
+        </div>
+    </div>
+</form>

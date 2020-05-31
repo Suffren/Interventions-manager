@@ -13,3 +13,9 @@ angular.module('app', [])
         }
     );
 })
+.component('modalIntervention', {
+    templateUrl: 'modal.html',
+    controller: function (API) {
+        var ctrl = this;
+    }
+});
