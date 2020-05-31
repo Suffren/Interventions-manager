@@ -99,7 +99,7 @@ def report_by_id():
     report = cur.execute(query).fetchone()
     return jsonify(report)
 
-@app.route('/api/v1/delete_report', methods=['DELETE'])
+@app.route('/api/v1/delete_report', methods=['POST'])
 @cross_origin()
 def delete_report():
     query_parameters = request.args
