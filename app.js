@@ -3,6 +3,7 @@ angular.module('app', [])
 .controller('mainCtrl', function(API) {
     ctrl = this;
     ctrl.reports = [];
+    ctrl.reverseDateOrder = true;
 
     ctrl.showModal = false;
 
@@ -13,6 +14,10 @@ angular.module('app', [])
     ctrl.closeModal = function() {
         getReports();
         ctrl.showModal = false;
+    }
+
+    ctrl.sortByDate = function() {
+        ctrl.reverseDateOrder = !ctrl.reverseDateOrder;
     }
 
     ctrl.delete = function(report_id) {

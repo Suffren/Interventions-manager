@@ -37,3 +37,9 @@ th, td {
 .hafl-w {
     width: 50%;
 }
+.sort-date:after {
+    content: '\25b2';   /* up */
+}
+.sort-date.reverse:after {
+    content: '\25bc';   /* down */
+}
