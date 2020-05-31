@@ -24,17 +24,19 @@ angular.module('app')
         });
     }
 
-    this.post = function(URI, data) {
+    this.post = function(URI, data) { // Data must be an object, TODO: handle arrays
         return $http({
             method: 'POST',
             url: URL + URI,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            /*  Converts an object to URL parameter(s)
-                This function only works with objects */
-            transformRequest: function(obj) {
-                return Object.keys(obj).map(function(d) {
-                    return encodeURIComponent(d) + '=' + encodeURIComponent(obj[d]);
-                }).join('&');
+            transformRequest: function(value) {
+                if (value && value.constructor === Object) {
+                    /*  Converts an object to URL parameter(s)
+                    This function only works with objects */
+                    return Object.keys(value).map(function(d) {
+                        return encodeURIComponent(d) + '=' + encodeURIComponent(value[d]);
+                    }).join('&');
+                }
             },
             data: data
         }).then(function successCallback(response) {
