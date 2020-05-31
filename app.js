@@ -15,14 +15,17 @@ angular.module('app', [])
         ctrl.showModal = false;
     }
 
-    API.get('/reports').then(
-        function(res) {
-            ctrl.reports = res;
-        },
-        function(error) {
-            alert(error);
-        }
-    );
+    function getReports() {
+        API.get('/reports').then(
+            function(res) {
+                ctrl.reports = res;
+            },
+            function(error) {
+                alert(error);
+            }
+        );
+    }
+    getReports();
 })
 .component('modalIntervention', {
     templateUrl: 'modal.html',
