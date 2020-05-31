@@ -33,11 +33,18 @@ angular.module('app', [])
         id: '@',
         onConfirm: '&'
     },
-    controller: function () {
+    controller: function (API) {
         var ctrl = this;
 
         ctrl.confirm = function() {
-            ctrl.onConfirm();
+            API.post('/add_report', ctrl.form).then(
+                function(res) {
+                    ctrl.onConfirm();
+                },
+                function(error) {
+                    alert(error);
+                }
+            );
         }
 
         ctrl.cancel = function() {
