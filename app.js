@@ -1,12 +1,23 @@
 angular.module('app', [])
 
 .controller('mainCtrl', function(API) {
-    self = this;
-    self.reports = [];
+    ctrl = this;
+    ctrl.reports = [];
+
+    ctrl.showModal = false;
+
+    ctrl.openModal = function() {
+        ctrl.showModal = true;
+    }
+
+    ctrl.closeModal = function() {
+        getReports();
+        ctrl.showModal = false;
+    }
 
     API.get('/reports').then(
         function(res) {
-            self.reports = res;
+            ctrl.reports = res;
         },
         function(error) {
             alert(error);
@@ -15,7 +26,19 @@ angular.module('app', [])
 })
 .component('modalIntervention', {
     templateUrl: 'modal.html',
-    controller: function (API) {
+    bindings: {
+        id: '@',
+        onConfirm: '&'
+    },
+    controller: function () {
         var ctrl = this;
+
+        ctrl.confirm = function() {
+            ctrl.onConfirm();
+        }
+
+        ctrl.cancel = function() {
+            ctrl.onConfirm();
+        }
     }
 });

@@ -40,6 +40,10 @@
                     </tr>
                 </table>
             </div>
+
+              <button type="button" class="btn btn-success" ng-click="main.openModal()">Ajouter une intervention</button>
+
+              <modal-intervention ng-if="main.showModal" on-confirm="main.closeModal()"></modal-intervention>
         </div>
     </body>
 
