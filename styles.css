@@ -15,6 +15,25 @@ th, td {
 .m-t {
     margin-top: 15px;
 }
+#interv_modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal_content {
+    color: #444;
+    width: 50%;
+    border-radius: 20px;
+    background-color: white;
+    padding: 25px;
+}
 .hafl-w {
     width: 50%;
 }
