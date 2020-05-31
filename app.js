@@ -41,7 +41,6 @@ angular.module('app', [])
 .component('modalIntervention', {
     templateUrl: 'modal.html',
     bindings: {
-        id: '@',
         onConfirm: '&'
     },
     controller: function (API) {
