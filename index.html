@@ -36,7 +36,9 @@
                         <td class="hafl-w hidden-xs">{{ report.description }}</td>
                         <td>{{ report.place }}</td>
                         <td><!-- status --></td>
-                        <td><!-- button --></td>
+                        <td>
+                            <button type="button" class="btn btn-danger" ng-click="main.delete(report.id)">Supp</button>
+                        </td>
                     </tr>
                 </table>
             </div>

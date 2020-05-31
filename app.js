@@ -15,6 +15,17 @@ angular.module('app', [])
         ctrl.showModal = false;
     }
 
+    ctrl.delete = function(report_id) {
+        API.post('/delete_report' + '?id=' + report_id).then(
+            function() {
+                getReports();
+            },
+            function(error) {
+                alert(error);
+            }
+        );
+    }
+
     function getReports() {
         API.get('/reports').then(
             function(res) {
