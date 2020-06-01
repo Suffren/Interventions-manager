@@ -39,6 +39,7 @@
                         <td>{{ report.place }}</td>
                         <td><!-- status --></td>
                         <td>
+                            <button type="button" class="btn btn-default" ng-click="main.openModal({report_id: report.id})">Edit</button>
                             <button type="button" class="btn btn-danger" ng-click="main.delete(report.id)">Supp</button>
                         </td>
                     </tr>
@@ -47,7 +48,7 @@
 
               <button type="button" class="btn btn-success" ng-click="main.openModal()">Ajouter une intervention</button>
 
-              <modal-intervention ng-if="main.showModal" on-confirm="main.closeModal()"></modal-intervention>
+              <modal-intervention ng-if="main.showModal"></modal-intervention>
         </div>
     </body>
 
