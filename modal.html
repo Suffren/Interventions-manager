@@ -1,25 +1,28 @@
-<form id="interv_modal">
+<form id="interv_modal" name="reportForm">
     <div class="modal_content">
-        <h2 style="text-align: center;">Intervention</h2>
+        <h2 class="txt-center">Intervention</h2>
 
         <div class="form-group">
-            <label for="label">Libellé:</label>
-            <input type="text" class="form-control" id="label" placeholder="Ex: Ampoule défecteuse" ng-model="$ctrl.form.label">
+            <label for="label">Libellé: *</label>
+            <input type="text" class="form-control" id="label" placeholder="Ex: Ampoule défecteuse"
+            ng-minlength="2" ng-model="$ctrl.form.label" required=required>
         </div>
 
         <div class="form-group">
-            <label for="place">Lieu:</label>
-            <input type="text" class="form-control" id="place" placeholder="Ex: Nantes" ng-model="$ctrl.form.place">
+            <label for="place">Lieu: *</label>
+            <input type="text" class="form-control" id="place" placeholder="Ex: Nantes"
+            ng-minlength="2" ng-model="$ctrl.form.place" required=required>
         </div>
 
         <div class="form-group">
-            <label for="pro_lastname">Nom de l'intervenant:</label>
-            <input type="text" class="form-control" id="pro_lastname" placeholder="Ex: Dupond" ng-model="$ctrl.form.pro_lastname">
+            <label for="pro_lastname">Nom de l'intervenant: *</label>
+            <input type="text" class="form-control" id="pro_lastname" placeholder="Ex: Dupond"
+            ng-minlength="2" ng-model="$ctrl.form.pro_lastname" required=required>
         </div>
 
         <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="text" class="form-control" id="date" placeholder="dd" ng-model="$ctrl.form.date">
+            <label for="date">Date: *</label>
+            <input type="text" class="form-control" id="date" placeholder="Ex: 22/02/2020" ng-model="$ctrl.form.date" required="required">
         </div>
 
         <div class="form-group">
@@ -29,7 +32,7 @@
 
         <div style="text-align: right;">
             <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()">Annuler</button>
-            <button type="button" class="btn btn-success" ng-click="$ctrl.confirm()">Valider</button>
+            <button type="button" class="btn btn-success" ng-click="$ctrl.confirm()" ng-disabled="reportForm.$invalid">Valider</button>
         </div>
     </div>
 </form>
