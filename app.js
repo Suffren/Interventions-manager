@@ -1,19 +1,23 @@
 angular.module('app', [])
 
-.controller('mainCtrl', function(API) {
+.controller('mainCtrl', function(API, Modal) {
     ctrl = this;
     ctrl.reports = [];
     ctrl.reverseDateOrder = true;
 
     ctrl.showModal = false;
 
-    ctrl.openModal = function() {
+    ctrl.openModal = function(data) {
         ctrl.showModal = true;
-    }
-
-    ctrl.closeModal = function() {
-        getReports();
-        ctrl.showModal = false;
+        Modal.open(data).then(
+            function(res) {
+                getReports();
+                ctrl.showModal = false;
+            },
+            function(res) {
+                ctrl.showModal = false;
+            }
+        );
     }
 
     ctrl.sortByDate = function() {
@@ -45,16 +49,17 @@ angular.module('app', [])
 })
 .component('modalIntervention', {
     templateUrl: 'modal.html',
-    bindings: {
-        onConfirm: '&'
-    },
-    controller: function (API) {
+    controller: function (API, Modal) {
         var ctrl = this;
 
         ctrl.confirm = function() {
-            API.post('/add_report', ctrl.form).then(
+            ctrl.create(ctrl.form);
+        }
+
+        ctrl.create = function(form) {
+            API.post('/add_report', form).then(
                 function(res) {
-                    ctrl.onConfirm();
+                    Modal.close();
                 },
                 function(error) {
                     alert(error);
@@ -63,7 +68,7 @@ angular.module('app', [])
         }
 
         ctrl.cancel = function() {
-            ctrl.onConfirm();
+            Modal.cancel()
         }
     }
 });
