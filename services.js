@@ -34,7 +34,7 @@ angular.module('app')
                     /*  Converts an object to URL parameter(s)
                     This function only works with objects */
                     return Object.keys(obj).map(function(key) {
-                        return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
+                        return encodeURIComponent(key) + '=' + (obj[key] ? encodeURIComponent(obj[key]) : encodeURIComponent(""));
                     }).join('&');
                 }
             },
