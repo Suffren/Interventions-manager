@@ -66,11 +66,34 @@ angular.module('app', [])
         }
 
         ctrl.confirm = function() {
+            ISODate = frDateToISO(ctrl.form.date);
+
+            if(isPast(ISODate))
+                return ctrl.dateError = "Impossible de planifier une intervention dans le passé.";
+
+            var post_data = {
+                'label': ctrl.form.label,
+                'description': ctrl.form.description,
+                'pro_lastname': ctrl.form.pro_lastname,
+                'place': ctrl.form.place,
+                'date': ISODate
+            };
+
             if(report) {
-                ctrl.update(ctrl.form, Modal.data.report_id);
+                ctrl.update(post_data, Modal.data.report_id);
             } else {
-                ctrl.create(ctrl.form);
+                ctrl.create(post_data);
             }
+        }
+
+        function frDateToISO(selectedDate) {
+            var dateParts = selectedDate.split("/");
+            var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
+            return formattedDate;
+        }
+
+        function isPast(selectedDate) {
+            return new Date(selectedDate) < new Date(Date.now());
         }
 
         ctrl.create = function(form) {
