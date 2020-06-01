@@ -13,16 +13,17 @@ app.config["DEBUG"] = True
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 reports = [
-    (0, "Nid-de-poule", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut risus ac neque porttitor egestas. Nulla placerat id purus vel elementum.", "Doe", "Nantes", "2019-12-25"),
-    (1, "Ampoule bureau à changer", "Aenean felis augue, malesuada sit amet ante in, sagittis bibendum nibh. In tristique gravida magna at suscipit. In commodo facilisis ipsum, ac aliquet purus lobortis quis. ", "Bordes", "Rennes", "2020-05-07")
+    (0, "Nid-de-poule", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ut risus ac neque porttitor egestas. Nulla placerat id purus vel elementum.", "Doe", "Nantes", "2020-06-25", 'valid'),
+    (1, "Ampoule bureau à changer", "Aenean felis augue, malesuada sit amet ante in, sagittis bibendum nibh. In tristique gravida magna at suscipit. In commodo facilisis ipsum, ac aliquet purus lobortis quis. ", "Bordes", "Rennes", "2020-10-07", 'valid'),
+    (2, "Mobilier cassé", "", "Dupond", "Vannes", "2019-05-07", 'archived')
 ]
 
 def create_table(cur):
     try:
         # Create the table
-        cur.execute('CREATE TABLE reports (id integer primary key, label text, description text, pro_lastname text, place text, date text)')
+        cur.execute('CREATE TABLE reports (id integer primary key, label text, description text, pro_lastname text, place text, date text, status text)')
         # Fill the table
-        cur.executemany('INSERT INTO reports VALUES(?, ?, ?, ?, ?, ?)', reports)
+        cur.executemany('INSERT INTO reports VALUES(?, ?, ?, ?, ?, ?, ?)', reports)
     except:
         print "SQLite warning: Table 'reports' already exists"
 
@@ -131,7 +132,7 @@ def add_report():
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
-    cur.execute('INSERT INTO reports VALUES(?, ?, ?, ?, ?, ?)', (None, label, description, pro_lastname, place, date))
+    cur.execute('INSERT INTO reports VALUES(?, ?, ?, ?, ?, ?, ?)', (None, label, description, pro_lastname, place, date, status))
     # Return the new reports.db
     all_reports = cur.execute('SELECT * FROM reports;').fetchall()
 
@@ -160,7 +161,8 @@ def update_report():
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
-    cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=? WHERE id=?', (label, description, date, pro_lastname, place, id))
+    cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=?, status=? WHERE id=?', (label, description, date, pro_lastname, place, status, id))
+
     # Get & return the updated report
     query = 'SELECT * FROM reports WHERE id={}'.format(id)
     report = cur.execute(query).fetchone()
