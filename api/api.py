@@ -128,6 +128,11 @@ def add_report():
     date = request.form.get('date')
     pro_lastname = request.form.get('pro_lastname')
     place = request.form.get('place')
+    status = "draft"
+
+    # Set the status to 'valid' if all inputs have been registered
+    if all(request.form.values()):
+        status = 'valid'
 
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
@@ -161,7 +166,13 @@ def update_report():
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
-    cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=?, status=? WHERE id=?', (label, description, date, pro_lastname, place, status, id))
+
+    # Update the status if all inputs have been registered
+    if all(request.form.values()):
+        status = 'valid'
+        cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=?, status=? WHERE id=?', (label, description, date, pro_lastname, place, status, id))
+    else:
+        cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=? WHERE id=?', (label, description, date, pro_lastname, place, id))
 
     # Get & return the updated report
     query = 'SELECT * FROM reports WHERE id={}'.format(id)
