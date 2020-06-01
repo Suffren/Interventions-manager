@@ -29,12 +29,12 @@ angular.module('app')
             method: 'POST',
             url: URL + URI,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            transformRequest: function(value) {
-                if (value && value.constructor === Object) {
+            transformRequest: function(obj) {
+                if (obj && obj.constructor === Object) {
                     /*  Converts an object to URL parameter(s)
                     This function only works with objects */
-                    return Object.keys(value).map(function(d) {
-                        return encodeURIComponent(d) + '=' + encodeURIComponent(value[d]);
+                    return Object.keys(obj).map(function(key) {
+                        return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
                     }).join('&');
                 }
             },
