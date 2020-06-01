@@ -58,6 +58,7 @@ angular.module('app', [])
             API.get('/report' + '?id=' + Modal.data.report_id).then(
                 function(res) {
                     ctrl.form = res;
+                    ctrl.form.date = ISOToFrDate(res.date)
                 },
                 function(error) {
                     alert(error);
@@ -90,6 +91,12 @@ angular.module('app', [])
             var dateParts = selectedDate.split("/");
             var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
             return formattedDate;
+        }
+
+        function ISOToFrDate(date) {
+            function twoDigitFact(s) { return (s < 10) ? '0' + s : s; }
+            var d = new Date(date)
+            return [twoDigitFact(d.getDate()), twoDigitFact(d.getMonth()+1), d.getFullYear()].join('/')
         }
 
         function isPast(selectedDate) {
