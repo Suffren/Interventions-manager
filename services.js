@@ -56,3 +56,20 @@ angular.module('app')
         });
     }
 })
+.service('Modal', function($q) {
+    this.data;
+
+    this.open = function(data) {
+        this.data = data;
+        this.deffered = $q.defer();
+        return this.deffered.promise;
+    }
+
+    this.close = function () {
+        return this.deffered.resolve("success")
+    }
+
+    this.cancel = function () {
+        return this.deffered.reject("cancel")
+    }
+})
