@@ -1,12 +1,12 @@
 angular.module('app')
 
 .service('API', function($http) {
-    var URL = "http://127.0.0.1:5000/api/v1";
+    var apiURL = "http://127.0.0.1:5000/api/v1";
 
-    this.get = function(URI) {
+    this.get = function(resourcePath) {
         return $http({
             method: 'GET',
-            url: URL + URI
+            url: apiURL + resourcePath
         }).then(function successCallback(response) {
             if(response.status === 200) {
                 return response.data;
@@ -24,10 +24,10 @@ angular.module('app')
         });
     }
 
-    this.post = function(URI, data) { // Data must be an object, TODO: handle arrays
+    this.post = function(resourcePath, data) { // Data must be an object, TODO: handle arrays
         return $http({
             method: 'POST',
-            url: URL + URI,
+            url: apiURL + resourcePath,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             transformRequest: function(obj) {
                 if (obj && obj.constructor === Object) {
