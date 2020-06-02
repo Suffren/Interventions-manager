@@ -9,7 +9,7 @@ This application is a prototype allowing to manage interventions. A simple inter
 
 First, you need to download this repository or clone it with [Git](https://git-scm.com/downloads) using this command in your favorite command-line interpreter:
 
-`git clone git@github.com:Suffren/Interventions-manager.git`
+`git clone https://github.com/Suffren/Interventions-manager.git`
 
 `cd Interventions-manager/`
 
