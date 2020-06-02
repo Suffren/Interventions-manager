@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import sqlite3
 import flask
 from flask import request, abort, jsonify
@@ -130,9 +131,15 @@ def add_report():
     place = request.form.get('place')
     status = "draft"
 
+    report_ISODate = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+    now = datetime.date.today()
+
     # Set the status to 'valid' if all inputs have been registered
     if all(request.form.values()):
         status = 'valid'
+    # The intervention has passed
+    if now > report_ISODate:
+        status = 'archived'
 
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
