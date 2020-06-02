@@ -34,6 +34,7 @@ angular.module('app', [])
                 getReports();
             },
             function(error) {
+                // TODO: Create an error handler
                 alert(error);
             }
         );
@@ -45,6 +46,7 @@ angular.module('app', [])
                 ctrl.reports = res;
             },
             function(error) {
+                // TODO: Create an error handler
                 alert(error);
             }
         );
@@ -65,6 +67,7 @@ angular.module('app', [])
                     ctrl.form.date = ISOToFrDate(res.date)
                 },
                 function(error) {
+                    // TODO: Create an error handler
                     alert(error);
                 }
             );
@@ -116,6 +119,7 @@ angular.module('app', [])
                     Modal.close();
                 },
                 function(error) {
+                    // TODO: Create an error handler
                     alert(error);
                 }
             );
@@ -127,6 +131,7 @@ angular.module('app', [])
                     Modal.close();
                 },
                 function(error) {
+                    // TODO: Create an error handler
                     alert(error);
                 }
             );

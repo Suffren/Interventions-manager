@@ -14,7 +14,7 @@ angular.module('app')
                 throw new Error("Une erreur est survenue.");
             }
         }, function errorCallback(response) {
-            // TODO: Redirect to 404 ?
+            // TODO: Create an error handler
             if (response.status) {
                console.warn( response.data.error || "Server error");
                return;
@@ -46,7 +46,7 @@ angular.module('app')
                 throw new Error("Une erreur est survenue.");
             }
         }, function errorCallback(response) {
-            // TODO: Redirect to 404 ?
+            // TODO: Create an error handler
             if (response.status) {
                console.warn( response.data.error || "Server error");
                return;
