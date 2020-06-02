@@ -39,11 +39,6 @@ def main():
 
     # Save
     conn.commit()
-
-    # REMOVE: Check reports
-    cur.execute('SELECT * FROM reports')
-    print cur.fetchall()
-
     conn.close()
 
 # Return an object with columns names as keys
