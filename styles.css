@@ -15,6 +15,9 @@ th, td {
 .m-t {
     margin-top: 15px;
 }
+.txt-center {
+    text-align: center;
+}
 #interv_modal {
     position: absolute;
     top: 0;
@@ -32,7 +35,7 @@ th, td {
     width: 50%;
     border-radius: 20px;
     background-color: white;
-    padding: 25px;
+    padding: 15px 50px 50px 50px;
 }
 .hafl-w {
     width: 50%;
