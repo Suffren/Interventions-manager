@@ -41,7 +41,7 @@
                             {{ main.status[report.status].fr }}
                         </td>
                         <td style="text-align: center;">
-                            <button type="button" class="btn btn-default" ng-click="main.openModal({report_id: report.id})">Edit</button>
+                            <button type="button" class="btn btn-default" ng-disabled="report.status === 'archived'" ng-click="main.openModal({report_id: report.id})">Edit</button>
                             <button type="button" class="btn btn-danger" ng-click="main.delete(report.id)">Supp</button>
                         </td>
                     </tr>
