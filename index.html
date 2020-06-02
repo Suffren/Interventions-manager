@@ -21,15 +21,15 @@
             <div class="reponsive-table">
                 <table class="table">
                     <tr class="success">
-                        <td>Libellés</td>
-                        <td>Intervenants</td>
+                        <td>Libellé</td>
+                        <td>Intervenant</td>
                         <td class="sort-date" ng-class="{ 'reverse': main.reverseDateOrder }" style="cursor: pointer;" ng-click="main.sortByDate()">
-                            Dates
+                            Date
                         </td>
-                        <td class="hafl-w hidden-xs">Descriptions</td>
-                        <td>Lieux</td>
-                        <td>Statuts</td>
-                        <td>Actions</td>
+                        <td class="hafl-w hidden-xs">Description</td>
+                        <td>Lieu</td>
+                        <td>Statut</td>
+                        <td>Action</td>
                     </tr>
                     <tr ng-repeat="report in main.reports | orderBy: 'date' : main.reverseDateOrder">
                         <td>{{ report.label }}</td>
