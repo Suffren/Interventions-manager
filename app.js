@@ -4,8 +4,12 @@ angular.module('app', [])
     ctrl = this;
     ctrl.reports = [];
     ctrl.reverseDateOrder = true;
-
     ctrl.showModal = false;
+    ctrl.status = {
+        'draft':    { 'fr': 'Brouillon', 'color': '#c4c4c4' },
+        'valid':    { 'fr': 'Validé', 'color': '#7feb89' },
+        'archived': { 'fr': 'Terminé', 'color': '#ffffff' }
+    };
 
     ctrl.openModal = function(data) {
         ctrl.showModal = true;
