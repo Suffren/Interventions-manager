@@ -35,7 +35,9 @@
                         <td>{{ report.label }}</td>
                         <td>M. {{ report.pro_lastname }}</td>
                         <td>{{ report.date | date: 'dd/MM/yyyy' }}</td>
-                        <td class="hafl-w hidden-xs">{{ report.description }}</td>
+                        <td class="hafl-w hidden-xs">
+                            {{ report.description || 'Pas de commentaire' }}
+                        </td>
                         <td>{{ report.place }}</td>
                         <td ng-style="{'background-color': main.status[report.status].color }">
                             {{ main.status[report.status].fr }}
