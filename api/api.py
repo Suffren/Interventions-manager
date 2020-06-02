@@ -50,7 +50,7 @@ def dict_factory(cursor, row):
     return d
 
 
-# Ensure this module has not been imported
+# Make sure this module has not been imported
 if __name__ == '__main__':
     main()
 
