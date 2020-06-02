@@ -145,13 +145,11 @@ def add_report():
     conn.row_factory = dict_factory
     cur = conn.cursor()
     cur.execute('INSERT INTO reports VALUES(?, ?, ?, ?, ?, ?, ?)', (None, label, description, pro_lastname, place, date, status))
-    # Return the new reports.db
-    all_reports = cur.execute('SELECT * FROM reports;').fetchall()
 
     conn.commit()
     conn.close()
 
-    return jsonify(all_reports)
+    return jsonify(data = "success")
 
 @app.route('/api/v1/update_report', methods=['POST'])
 @cross_origin()
