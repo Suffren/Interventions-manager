@@ -13,7 +13,9 @@ First, you need to download this repository or clone it with [Git](https://git-s
 
 `cd Interventions-manager/`
 
-Then, you need to install [Node.js](https://nodejs.org/en/download/) and [python v2.7](https://www.python.org/downloads/)
+Then, you need to install [Node.js](https://nodejs.org/en/download/) and [Python](https://www.python.org/downloads/release/python-2713/) **version 2.7**:
+
+During the Python installation, choose "Will be installed on your local drive" when clicking on "Add python.exe to Path" on the "Customize Python" window.
 
 Install Flask with the Python package installer:
 
