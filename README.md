@@ -21,11 +21,18 @@ Install Flask with the Python package installer:
 
 `pip install -U Flask`
 
+Install Flask-cors:
+
+`pip install -U flask-cors`
+
+
 You're now set to run the server !
 
 `cd api/`
 
 `Python api.py`
+
+
 
 Install 'http-server' npm package on **another** command-line window:
 
