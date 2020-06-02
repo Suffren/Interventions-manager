@@ -170,16 +170,23 @@ def update_report():
     else:
         return abort(404, description = "Resource not found.")
 
+    report_ISODate = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+    now = datetime.date.today()
+
     conn = sqlite3.connect('reports.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
 
     # Update the status if all inputs have been registered
-    if all(request.form.values()):
+    if all(request.form.values()) and report_ISODate > now:
         status = 'valid'
-        cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=?, status=? WHERE id=?', (label, description, date, pro_lastname, place, status, id))
+    # The intervention has passed
+    elif now > report_ISODate:
+        status = 'archived'
     else:
-        cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=? WHERE id=?', (label, description, date, pro_lastname, place, id))
+        status = 'draft'
+
+    cur.execute('UPDATE reports SET label=?, description=?, date=?, pro_lastname=?, place=?, status=? WHERE id=?', (label, description, date, pro_lastname, place, status, id))
 
     # Get & return the updated report
     query = 'SELECT * FROM reports WHERE id={}'.format(id)
