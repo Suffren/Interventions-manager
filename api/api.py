@@ -58,11 +58,6 @@ if __name__ == '__main__':
 def error_handler(err):
     return jsonify(error = str(err)), 404
 
-@app.route('/', methods=['GET'])
-def home():
-    return  '''<h1>Distant Reading Archive</h1>
-            <p>A prototype API for distant reading of science fiction novels.</p>'''
-
 # route() decorator binds a function to a URL
 @app.route('/api/v1/reports', methods=['GET'])
 # Allow all origins, all methods
