@@ -76,11 +76,9 @@ angular.module('app', [])
         ctrl.confirm = function() {
             ISODate = frDateToISO(ctrl.form.date);
 
-            /* Not needed for this demo version
             // Disallow to entering a past date
             if(isPast(ISODate))
                 return ctrl.dateError = "Impossible de planifier une intervention dans le passé.";
-            */
 
             var post_data = {
                 'label': ctrl.form.label,
